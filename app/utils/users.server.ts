@@ -8,7 +8,7 @@ export const createUser = async (user: RegisterForm) => {
     data: {
       email: user.email,
       password: passwordHash,
-      pofile: {
+      profile: {
         firstName: user.firstName,
         lastName: user.lastName,
       },
@@ -19,4 +19,27 @@ export const createUser = async (user: RegisterForm) => {
     id: newUser.id,
     email: user.email,
   };
+};
+
+export const getOtherUsers = async (userId: string) => {
+  return await prisma.user.findMany({
+    where: {
+      id: {
+        not: userId,
+      },
+    },
+    orderBy: {
+      profile: {
+        firstName: "asc",
+      },
+    },
+  });
+};
+
+export const getUserById = async (userId: string) => {
+  return await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
 };
