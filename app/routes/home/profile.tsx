@@ -11,6 +11,7 @@ import { getUser, requireUserId } from "~/utils/auth.server";
 import { updateUser } from "~/utils/users.server";
 import { departments } from "~/utils/constants";
 import { validateName } from "~/utils/validators.server";
+import { ImageUploader } from "~/components/image-upload";
 
 export const action: ActionFunction = async ({ request }) => {
   const userId = await requireUserId(request);
@@ -62,7 +63,25 @@ export default function ProfileSettings() {
     firstName: user?.profile?.firstName,
     lastName: user?.profile?.lastName,
     department: user?.profile?.department || "IT",
+    profilePicture: user?.profile?.profilePicture || "",
   });
+
+  const handleFileUpload = async (file: File) => {
+    let inputFormData = new FormData();
+    inputFormData.append("profile-pic", file);
+
+    const response = await fetch("/avatar", {
+      method: "post",
+      body: inputFormData,
+    });
+
+    const { imageUrl } = await response.json();
+
+    setFormData({
+      ...formData,
+      profilePicture: imageUrl,
+    });
+  };
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -76,6 +95,12 @@ export default function ProfileSettings() {
       <div className="p-3">
         <h2 className="text-4xl font-semibold text-blue-600 text-center mb-4">
           <div className="flex">
+            <div className="w-1/3">
+              <ImageUploader
+                onChange={handleFileUpload}
+                imageUrl={formData.profilePicture || ""}
+              />
+            </div>
             <div className="flex-1">
               <form method="post">
                 <FormField

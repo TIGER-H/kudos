@@ -11,9 +11,10 @@ datasource db {
 }
 
 type Profile {
-  firstName  String
-  lastName   String
-  department Department? @default(IT)
+  firstName      String
+  lastName       String
+  department     Department? @default(IT)
+  profilePicture String?
 }
 
 model User {
