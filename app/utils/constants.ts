@@ -34,3 +34,14 @@ export const sortOptions = [
     value: "emoji",
   },
 ];
+
+export const departments = [
+  { name: "IT", value: "IT" },
+  { name: "HR", value: "HR" },
+  { name: "Engineering", value: "ENGINEERING" },
+  { name: "Sales", value: "SALES" },
+  { name: "Production", value: "PRODUCTION" },
+  { name: "Marketing", value: "MARKETING" },
+  { name: "Finance", value: "FINANCE" },
+  { name: "Support", value: "SUPPORT" },
+];

@@ -4,7 +4,7 @@ interface props {
     value: any;
   }[];
   className: string;
-  containerClassName: string;
+  containerClassName?: string;
   id?: string;
   label?: string;
   name?: string;

@@ -11,8 +11,9 @@ datasource db {
 }
 
 type Profile {
-  firstName String
-  lastName  String
+  firstName  String
+  lastName   String
+  department Department? @default(IT)
 }
 
 model User {
@@ -21,7 +22,7 @@ model User {
   updatedAt     DateTime @updatedAt
   email         String   @unique
   password      String
-  profile        Profile
+  profile       Profile
   authoredKudos Kudo[]   @relation("AuthoredKudos")
   kudos         Kudo[]   @relation("RecievedKudos")
 }
