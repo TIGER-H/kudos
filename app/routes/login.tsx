@@ -102,7 +102,6 @@ export const action: ActionFunction = async ({ request }) => {
 export default function Login() {
   const [action, setAction] = useState<"login" | "register">("login");
   const actionData = useActionData();
-  console.log(actionData);
 
   const firstLoad = useRef(true);
   const [errors, setErrors] = useState(actionData?.errors || {});
